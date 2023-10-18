@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>영어-한글 번역</title>
+</head>
+<body>
+    <h1>영어-한글 번역</h1>
+    <form id="translation-form">
+        <textarea id="text" rows="4" cols="50" placeholder="영어 텍스트를 입력하세요"></textarea>
+        <button type="submit">번역</button>
+    </form>
+    <div id="translation-result"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#translation-form').submit(function(e) {
+                e.preventDefault();
+                var text = $('#text').val();
+                $.post('/translate', { text: text }, function(data) {
+                    $('#translation-result').text('번역 결과: ' + data.translated_text);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
